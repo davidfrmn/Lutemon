@@ -3,7 +3,7 @@ package com.example.lutemon.lutemons;
 public class Lutemon {
 
     private final int id;
-    private static int idCounter = 1;
+    private static int idCounter = 0;
     private final String name;
     private final String color;
     private int experience;

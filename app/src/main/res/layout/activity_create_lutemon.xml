@@ -28,4 +28,72 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <RadioGroup
+        android:id="@+id/radioGroupColor"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/radioButtonOrange"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:buttonTint="#E26910"
+            android:buttonTintMode="src_in"
+            android:checked="true"
+            android:text="Orange Lutemon\nHP:17 | Attack: 8 | Defense: 1"
+            android:textColorLink="#F1712C" />
+
+        <RadioButton
+            android:id="@+id/radioButtonGreen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Green Lutemon\nHP:19 | Attack: 6 | Defense: 3" />
+
+        <RadioButton
+            android:id="@+id/radioButtonPink"
+            android:layout_width="316dp"
+            android:layout_height="wrap_content"
+            android:text="Pink Lutemon\nHP: 18 | Attack: 7 | Defense: 2" />
+
+        <RadioButton
+            android:id="@+id/radioButtonBlack"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Black Lutemon\nHP:16 | Attack: 9 | Defense: 0" />
+
+        <RadioButton
+            android:id="@+id/radioButtonWhite"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="White Lutemon\nHP:20 | Attack: 5 | Defense: 4" />
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/editTextName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:hint="Name"
+        android:inputType="text"
+        app:layout_constraintBottom_toTopOf="@+id/radioGroupColor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/buttonCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="createLutemon"
+        android:text="Create"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroupColor" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 public class Storage {
     private static Storage instance;
+    private Lutemon activeLutemon;
     private ArrayList<Lutemon> lutemons;
 
     private Storage() {
@@ -37,6 +38,14 @@ public class Storage {
             }
         }
         return null;
+    }
+
+    public Lutemon getActiveLutemon() {
+        return activeLutemon;
+    }
+
+    public void setActiveLutemon(Lutemon lutemon) {
+        activeLutemon = lutemon;
     }
 
 }
