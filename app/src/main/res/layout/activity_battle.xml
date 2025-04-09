@@ -35,6 +35,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="56dp"
         android:layout_marginBottom="16dp"
+        android:onClick="attack"
         android:text="Attack"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintStart_toStartOf="parent" />
@@ -45,7 +46,68 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="52dp"
         android:layout_marginBottom="16dp"
+        android:onClick="defend"
         android:text="Defence"
         app:layout_constraintBottom_toTopOf="@+id/button"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewNameAlly"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="176dp"
+        android:text="NameAlly"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAlly"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageViewAlly"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageViewEnemy"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <ImageView
+        android:id="@+id/imageViewEnemy"
+        android:layout_width="74dp"
+        android:layout_height="74dp"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/textViewEnemyName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="100dp"
+        android:layout_marginEnd="16dp"
+        android:text="NameEnemy"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnemy"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progressBarHealthAlly"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="111dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintStart_toEndOf="@+id/imageViewAlly"
+        app:layout_constraintTop_toBottomOf="@+id/textViewNameAlly" />
+
+    <ProgressBar
+        android:id="@+id/progressBarHealthEnemy"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="111dp"
+        android:layout_height="21dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintEnd_toStartOf="@+id/imageViewEnemy"
+        app:layout_constraintTop_toBottomOf="@+id/textViewEnemyName" />
 </androidx.constraintlayout.widget.ConstraintLayout>

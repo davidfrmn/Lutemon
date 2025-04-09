@@ -2,12 +2,13 @@ package com.example.lutemon;
 
 import com.example.lutemon.lutemons.Lutemon;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Statistics {
 
-    public static int numberOfLutemons(){
-        return Lutemon.getIdCounter();
+    public static int numberOfLutemons(ArrayList<Lutemon> lutemons){
+        return lutemons.size();
     }
     public static int numberOfBattles(List<Lutemon> lutemons){
         int battles = 0;

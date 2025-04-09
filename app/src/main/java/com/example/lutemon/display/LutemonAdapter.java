@@ -17,6 +17,7 @@ public class LutemonAdapter  extends RecyclerView.Adapter<LutemonViewHolder>{
     private final Context context;
     private List<Lutemon> lutemons;
     boolean modeBattleStatistics;
+    // ToDo make them clickable and add as active
 
     public LutemonAdapter(Context context, List<Lutemon> lutemons, boolean modeBattleStatistics) {
         this.context = context;

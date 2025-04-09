@@ -57,7 +57,7 @@ public class Lutemon {
         idCounter--; // it will decrease the id number so we will get continuous id numbers and since we don't save the close it doesn't matter if it has the same id as another lutemon
         return new Lutemon(this.name, this.color, this.experience, this.maxHealth, this.attack, this.defense);
     }
-    public void increaseDefense(){ this.defense++;}
+    public void increaseDefense( int amount){ this.defense+=amount;}
 
     //for fighting
     public void decreaseHealth(int damage){

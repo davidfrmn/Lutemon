@@ -50,7 +50,7 @@ public class StatisticsActivity extends AppCompatActivity {
         recyclerView = setupRecyclerView();
         recyclerView.setAdapter(lutemonAdapter);
 
-        String textNoLutemons = "Number of Lutemons: " + String.valueOf(Statistics.numberOfLutemons());
+        String textNoLutemons = "Number of Lutemons: " + String.valueOf(Statistics.numberOfLutemons(storage.listLutemons()));
         textViewNumberOfLutemons.setText(textNoLutemons);
 
         String textNoBattles = "Number of Battles: " + String.valueOf(Statistics.numberOfBattles(storage.listLutemons()));
