@@ -101,6 +101,8 @@ public class BattleActivity extends AppCompatActivity {
     public void defend(View view){
         lutemonAllyClone.increaseDefense(1);
         lutemonEnemy.attack(lutemonAllyClone);
+        progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
+        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
     }
 
 

@@ -61,7 +61,12 @@ public class Lutemon {
 
     //for fighting
     public void decreaseHealth(int damage){
-        health -= (damage - this.defense);
+        damage = damage - this.defense;
+        if (damage <= 0){
+            damage = 0;
+        }
+
+        health -= damage;
         if(health <= 0){
             health = 0;
         }
