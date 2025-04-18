@@ -1,3 +1,5 @@
+package com.example.lutemon;
+
 import android.content.Context;
 
 import com.example.lutemon.lutemons.BlackLutemon;
@@ -13,7 +15,6 @@ import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.FileWriter;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
