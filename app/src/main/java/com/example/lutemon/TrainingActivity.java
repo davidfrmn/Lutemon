@@ -31,6 +31,17 @@ public class TrainingActivity extends AppCompatActivity {
         storage = Storage.getInstance();
         if (storage.getActiveLutemon() != null) {
             lutemon = storage.getActiveLutemon();
+            // Train button functionality
+            findViewById(R.id.btnTrain).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    lutemon.increaseExperience(); // Increases experience
+                    Toast.makeText(TrainingActivity.this,
+                            lutemon.getName() + " trained! ATK: " +
+                                    lutemon.getAttack() + " DEF: " + lutemon.getDefense(),
+                            Toast.LENGTH_SHORT).show();
+                }
+            });
         } else {
             Toast.makeText(this, "No lutemon selected", Toast.LENGTH_SHORT).show();
             launchMenu(null);
