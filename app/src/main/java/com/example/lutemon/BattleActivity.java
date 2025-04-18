@@ -21,10 +21,12 @@ public class BattleActivity extends AppCompatActivity {
     private Lutemon lutemonAlly;
     private Lutemon lutemonAllyClone;
     private Lutemon lutemonEnemy;
-    TextView textViewNameAlly;
-    TextView textViewNameEnemy;
-    ProgressBar progressBarHealthAlly;
-    ProgressBar progressBarHealthEnemy;
+    private TextView textViewNameAlly;
+    private TextView textViewNameEnemy;
+    private ProgressBar progressBarHealthAlly;
+    private ProgressBar progressBarHealthEnemy;
+    private TextView battleLog;
+    private String battleLogText;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +69,11 @@ public class BattleActivity extends AppCompatActivity {
         progressBarHealthEnemy.setMax(lutemonEnemy.getMaxHealth());
         progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
 
+        battleLog = findViewById(R.id.textViewBattleLog);
+        battleLogText = String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+
 
     }
 
@@ -84,25 +91,50 @@ public class BattleActivity extends AppCompatActivity {
     public void attack(View view){
         //attacking + handle win/loss
         lutemonAllyClone.attack(lutemonEnemy);
+        battleLogText +="\n" + lutemonAllyClone.getName() + " attacked " + lutemonEnemy.getName();
         if (lutemonEnemy.getHealth() <= 0){
+            battleLogText +="\n" + lutemonEnemy.getName() + " died";
             lutemonAlly.increaseWinCounter();
             lutemonAlly.increaseExperience();
             launchBattleOutcome(view, "won");
         }
+        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
+        battleLogText += "\n" + lutemonEnemy.getName() + " escaped death and attacked back";
+        battleLog.setText(battleLogText);
+
         lutemonEnemy.attack(lutemonAllyClone);
         if (lutemonAllyClone.getHealth() <= 0){
+            battleLogText += "\n" + lutemonAllyClone.getName() + " died";
             launchBattleOutcome(view, "lost");
         }
-        //updating healthbar
         progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
-        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+        battleLogText += "\n" + lutemonAllyClone.getName() + " escaped death";
+        battleLogText +="\n#####\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+
     }
 
     public void defend(View view){
         lutemonAllyClone.increaseDefense(1);
+        battleLogText +="\n" + lutemonAllyClone.getName() + " increased defense";
+        battleLogText += "\n" + lutemonEnemy.getName() + " attacked";
+        battleLog.setText(battleLogText);
+
         lutemonEnemy.attack(lutemonAllyClone);
         progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
         progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
+        if (lutemonAllyClone.getHealth() <= 0){
+            battleLogText += "\n" + lutemonAllyClone.getName() + "died";
+            launchBattleOutcome(view, "lost");
+        }
+        battleLogText += "\n"+ lutemonAllyClone.getName() + " escaped death";
+        battleLogText +="\n#####\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+
     }
 
 
