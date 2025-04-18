@@ -1,5 +1,6 @@
 package com.example.lutemon.display;
 
+import android.graphics.Color; // Import Color
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,11 +20,12 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
         textViewDataLine1 = itemView.findViewById(R.id.textViewDataLine1);
         textViewDataLine2 = itemView.findViewById(R.id.textViewDataLine2);
         imageViewLutemon = itemView.findViewById(R.id.imageViewAvatar);
-
     }
 
     public void bind(Lutemon lutemon, boolean modeBattleStatistics) {
         //TODO set avatar
+        imageViewLutemon.setImageResource(itemView.getContext().getResources().getIdentifier(
+                lutemon.getName().toLowerCase(), "drawable", itemView.getContext().getPackageName()));
 
         String dataLine1 = lutemon.getName() + " (" + lutemon.getExperience() + ")";
         String dataLine2;
@@ -35,8 +37,13 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
         textViewDataLine1.setText(dataLine1);
         textViewDataLine2.setText(dataLine2);
-
     }
 
-
+    public void setActiveState(boolean isActive) {
+        if (isActive) {
+            itemView.setBackgroundColor(Color.LTGRAY); // Or your preferred active color
+        } else {
+            itemView.setBackgroundColor(Color.TRANSPARENT); // Default color
+        }
+    }
 }
