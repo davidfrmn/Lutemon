@@ -43,12 +43,19 @@ public class Lutemon {
     public int getDefense() {return this.defense;}
     public int getMaxHealth() {return this.maxHealth;}
     public int getHealth() {return this.health;}
+
     public int getBattleCounter() {return this.battleCounter;}
     public void increaseBattleCounter() {this.battleCounter++;}
+    public void setBattleCounter(int battleCounter) {this.battleCounter = battleCounter;}
+
     public int getWinCounter() {return this.winCounter;}
     public void increaseWinCounter() {this.winCounter++;}
+    public void setWinCounter(int winCounter) {this.winCounter = winCounter;}
+
     public int getTrainingCounter() {return this.trainingCounter;}
     public void increaseTrainingCounter() {this.trainingCounter++;}
+    public void setTrainingCounter(int trainingCounter) {this.trainingCounter = trainingCounter;}
+
     public static int getIdCounter() {return idCounter;}
 
     //for temporary battle modifications
