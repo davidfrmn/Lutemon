@@ -8,9 +8,14 @@ public class Storage {
     private static Storage instance;
     private Lutemon activeLutemon;
     private ArrayList<Lutemon> lutemons;
+    private int totalTrainings;
+
+    public void saveLutemons() {
+    }
 
     private Storage() {
         lutemons = new ArrayList<>();
+        totalTrainings = 0;
     }
 
     public static Storage getInstance() {
@@ -23,6 +28,7 @@ public class Storage {
     public void addLutemon(Lutemon lutemon) {
         lutemons.add(lutemon);
     }
+
     public void removeLutemon(Lutemon lutemon) {
         lutemons.remove(lutemon);
     }
@@ -46,6 +52,14 @@ public class Storage {
 
     public void setActiveLutemon(Lutemon lutemon) {
         activeLutemon = lutemon;
+    }
+
+    public void increaseTotalTrainings() {
+        this.totalTrainings++;
+    }
+
+    public int getTotalTrainings() {
+        return totalTrainings;
     }
 
 }

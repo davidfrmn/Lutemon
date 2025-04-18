@@ -14,8 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.lutemon.lutemons.Lutemon;
 
 public class TrainingActivity extends AppCompatActivity {
+
     private Storage storage;
-    Lutemon lutemon;
+    private Lutemon lutemon;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +36,6 @@ public class TrainingActivity extends AppCompatActivity {
             Toast.makeText(this, "No lutemon selected", Toast.LENGTH_SHORT).show();
             launchMenu(null);
         }
-
     }
 
     public void launchMenu(View view) {
@@ -43,4 +43,18 @@ public class TrainingActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void trainLutemon(View view) {
+        if (lutemon != null) {
+            lutemon.increaseExperience(1);
+            lutemon.increaseTrainings();
+
+
+            storage.increaseTotalTrainings();
+            storage.saveLutemons();
+
+            Toast.makeText(this, lutemon.getName() + " gained experience!", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(this, "No lutemon selected", Toast.LENGTH_SHORT).show();
+        }
+    }
 }

@@ -39,8 +39,6 @@ public class BattleActivity extends AppCompatActivity {
 
         storage = Storage.getInstance();
 
-        // if there is no selected lutemon, launch menu
-        // if there is a selected lutemon, get it and clone it (allows temporary buffs)
         if (storage.getActiveLutemon() != null) {
             lutemonAlly = storage.getActiveLutemon();
             lutemonAllyClone = lutemonAlly.getClone();
@@ -86,7 +84,7 @@ public class BattleActivity extends AppCompatActivity {
         lutemonAllyClone.attack(lutemonEnemy);
         if (lutemonEnemy.getHealth() <= 0){
             lutemonAlly.increaseWinCounter();
-            lutemonAlly.increaseExperience();
+            lutemonAlly.increaseExperience(1);
             launchBattleOutcome(view, "won");
         }
         lutemonEnemy.attack(lutemonAllyClone);
