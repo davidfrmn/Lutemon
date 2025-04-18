@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,10 +22,13 @@ public class BattleActivity extends AppCompatActivity {
     private Lutemon lutemonAlly;
     private Lutemon lutemonAllyClone;
     private Lutemon lutemonEnemy;
-    TextView textViewNameAlly;
-    TextView textViewNameEnemy;
-    ProgressBar progressBarHealthAlly;
-    ProgressBar progressBarHealthEnemy;
+    private TextView textViewNameAlly;
+    private TextView textViewNameEnemy;
+    private ProgressBar progressBarHealthAlly;
+    private ProgressBar progressBarHealthEnemy;
+    private TextView battleLog;
+    private String battleLogText;
+    private ScrollView battleLogScroll;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +71,14 @@ public class BattleActivity extends AppCompatActivity {
         progressBarHealthEnemy.setMax(lutemonEnemy.getMaxHealth());
         progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
 
+        battleLog = findViewById(R.id.textViewBattleLog);
+        battleLogText = String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+
+        battleLogScroll = findViewById(R.id.ScrollViewBattleLog);
+
+
 
     }
 
@@ -82,27 +94,84 @@ public class BattleActivity extends AppCompatActivity {
     }
 
     public void attack(View view){
+        //dodging
+        boolean enemyDodged = false;
+        boolean allyDodged = false;
+        if (Math.random() < 0.15) {
+            allyDodged = true;
+        }
+        if (Math.random() > 0.74) {
+            enemyDodged = true;
+        }
+
         //attacking + handle win/loss
-        lutemonAllyClone.attack(lutemonEnemy);
+        battleLogText +="\n" + lutemonAllyClone.getName() + " attacked " + lutemonEnemy.getName();
+        if (!enemyDodged) {
+            lutemonAllyClone.attack(lutemonEnemy);
+        } else{
+            battleLogText +="\n" + lutemonEnemy.getName() + " dodged the attack";
+        }
+
+        // manage death
         if (lutemonEnemy.getHealth() <= 0){
+            battleLogText +="\n" + lutemonEnemy.getName() + " died";
             lutemonAlly.increaseWinCounter();
             lutemonAlly.increaseExperience();
             launchBattleOutcome(view, "won");
         }
-        lutemonEnemy.attack(lutemonAllyClone);
+        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
+        //enemy attacking back
+        battleLogText += "\n" + lutemonEnemy.getName() + " escaped death and attacked back";
+        battleLog.setText(battleLogText);
+        if (!allyDodged) {
+            lutemonEnemy.attack(lutemonAllyClone);
+        } else {
+            battleLogText +="\n" + lutemonAllyClone.getName() + " dodged the attack";
+        }
+
         if (lutemonAllyClone.getHealth() <= 0){
+            battleLogText += "\n" + lutemonAllyClone.getName() + " died";
             launchBattleOutcome(view, "lost");
         }
-        //updating healthbar
         progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
-        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
+        battleLogText += "\n" + lutemonAllyClone.getName() + " escaped death";
+        battleLogText +="\n#####\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+        battleLogScroll.fullScroll(View.FOCUS_DOWN);
     }
 
     public void defend(View view){
+        boolean allyDodged = false;
+        if (Math.random() < 0.1) {
+            allyDodged = true;
+        }
+
         lutemonAllyClone.increaseDefense(1);
-        lutemonEnemy.attack(lutemonAllyClone);
+
+        battleLogText +="\n" + lutemonAllyClone.getName() + " increased defense";
+        battleLogText += "\n" + lutemonEnemy.getName() + " attacked";
+        battleLog.setText(battleLogText);
+        if (!allyDodged) {
+            lutemonEnemy.attack(lutemonAllyClone);
+        } else {
+            battleLogText +="\n" + lutemonAllyClone.getName() + " dodged the attack";
+        }
         progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
         progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
+        if (lutemonAllyClone.getHealth() <= 0){
+            battleLogText += "\n" + lutemonAllyClone.getName() + "died";
+            launchBattleOutcome(view, "lost");
+        }
+
+        battleLogText += "\n"+ lutemonAllyClone.getName() + " escaped death";
+        battleLogText +="\n#####\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());
+        battleLogText += "\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonEnemy.getName(), lutemonEnemy.getExperience(), lutemonEnemy.getAttack(), lutemonEnemy.getDefense(), lutemonEnemy.getHealth(), lutemonEnemy.getMaxHealth());
+        battleLog.setText(battleLogText);
+        battleLogScroll.fullScroll(View.FOCUS_DOWN);
     }
 
 

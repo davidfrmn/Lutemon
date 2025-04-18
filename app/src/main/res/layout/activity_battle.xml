@@ -110,4 +110,23 @@
         android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toStartOf="@+id/imageViewEnemy"
         app:layout_constraintTop_toBottomOf="@+id/textViewEnemyName" />
+
+    <ScrollView
+        android:id="@+id/ScrollViewBattleLog"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        android:layout_marginTop="260dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/textViewBattleLog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginTop="0dp"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>
