@@ -42,6 +42,8 @@ public class TrainingActivity extends AppCompatActivity {
         }
 
         imageView = findViewById(R.id.imageView);
+        imageView.setImageResource(lutemon.getImageID());
+
         textViewName = findViewById(R.id.textViewTrainingDataLine1);
         textViewTrainingStat = findViewById(R.id.textViewTrainingDataLine2);
         updateTrainingData();

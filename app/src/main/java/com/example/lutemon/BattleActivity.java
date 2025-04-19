@@ -3,6 +3,7 @@ package com.example.lutemon;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
 import android.widget.TextView;
@@ -29,6 +30,8 @@ public class BattleActivity extends AppCompatActivity {
     private TextView battleLog;
     private String battleLogText;
     private ScrollView battleLogScroll;
+    private ImageView imageAlly;
+    private ImageView imageEnemy;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +60,12 @@ public class BattleActivity extends AppCompatActivity {
         lutemonEnemy = new BlackLutemon("Wild Lutemon", lutemonAlly.getExperience());
 
         //setting up the views
+        imageAlly = findViewById(R.id.imageViewAlly);
+        imageAlly.setImageResource(lutemonAlly.getImageID());
+
+        imageEnemy = findViewById(R.id.imageViewEnemy);
+        imageEnemy.setImageResource(lutemonEnemy.getImageID());
+
         textViewNameAlly = findViewById(R.id.textViewNameAlly);
         textViewNameAlly.setText(lutemonAlly.getName());
 
