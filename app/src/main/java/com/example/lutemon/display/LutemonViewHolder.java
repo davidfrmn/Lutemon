@@ -34,7 +34,6 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Lutemon lutemon, boolean modeBattleStatistics) {
-        //TODO set avatar
 
         String dataLine1 = lutemon.getName() + " (" + lutemon.getExperience() + ")";
         String dataLine2;
@@ -46,6 +45,7 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
 
         textViewDataLine1.setText(dataLine1);
         textViewDataLine2.setText(dataLine2);
+        imageViewLutemon.setImageResource(lutemon.getImageID());
 
     }
 
