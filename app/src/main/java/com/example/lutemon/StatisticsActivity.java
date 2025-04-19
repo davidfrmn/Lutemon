@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lutemon.display.LutemonAdapter;
 
-public class StatisticsActivity extends AppCompatActivity {
+public class StatisticsActivity extends AppCompatActivity implements LutemonAdapter.OnItemClickListener {
     private Storage storage;
     private LutemonAdapter lutemonAdapter;
     private RecyclerView recyclerView;
@@ -46,7 +46,7 @@ public class StatisticsActivity extends AppCompatActivity {
         textViewnumberOfWins = findViewById(R.id.textViewnumberOfWins);
 
         storage = Storage.getInstance();
-        lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), true);
+        lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), true,this);
         recyclerView = setupRecyclerView();
         recyclerView.setAdapter(lutemonAdapter);
 
@@ -68,4 +68,8 @@ public class StatisticsActivity extends AppCompatActivity {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
+
+    // handle selection -> do nothing
+    @Override
+    public void onItemClick(int position) {}
 }
