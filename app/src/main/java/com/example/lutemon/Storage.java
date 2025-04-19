@@ -11,6 +11,7 @@ public class Storage {
     private static Storage instance;
     private Lutemon activeLutemon;
     private ArrayList<Lutemon> lutemons;
+    boolean isLoaded = false;
 
     private Storage() {
         lutemons = new ArrayList<>();
@@ -70,7 +71,12 @@ public class Storage {
             Toast toast = Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT);
             System.out.println("Error: " + e.getMessage());
         }
+        isLoaded = true;
 
+    }
+
+    public boolean isLoaded() {
+        return isLoaded;
     }
 
 }
