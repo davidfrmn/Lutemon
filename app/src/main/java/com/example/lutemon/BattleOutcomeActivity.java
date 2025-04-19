@@ -29,6 +29,10 @@ public class BattleOutcomeActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String outcome = intent.getStringExtra("outcome");
 
+        //saving
+        Storage storage = Storage.getInstance();
+        storage.saveLutemons(this);
+
         //setting the outcome text
         textViewOutcome = findViewById(R.id.textViewOutcome);
         String textOutcome = "You have " + outcome + " the match!";

@@ -59,6 +59,7 @@ public class TrainingActivity extends AppCompatActivity {
         lutemon.increaseTrainingCounter();
         lutemon.increaseExperience();
         updateTrainingData();
+        storage.saveLutemons(this);
     }
 
     private void updateTrainingData() {

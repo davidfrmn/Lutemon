@@ -57,6 +57,10 @@ public class BattleActivity extends AppCompatActivity {
         }
 
         lutemonAlly.increaseBattleCounter();
+
+        //saving
+        storage.saveLutemons(this);
+
         lutemonEnemy = new BlackLutemon("Wild Lutemon", lutemonAlly.getExperience());
 
         //setting up the views
@@ -121,29 +125,35 @@ public class BattleActivity extends AppCompatActivity {
             battleLogText +="\n" + lutemonEnemy.getName() + " dodged the attack";
         }
 
+        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
         // manage death
         if (lutemonEnemy.getHealth() <= 0){
             battleLogText +="\n" + lutemonEnemy.getName() + " died";
             lutemonAlly.increaseWinCounter();
             lutemonAlly.increaseExperience();
             launchBattleOutcome(view, "won");
+            return;
         }
-        progressBarHealthEnemy.setProgress(lutemonEnemy.getHealth());
+
 
         //enemy attacking back
         battleLogText += "\n" + lutemonEnemy.getName() + " escaped death and attacked back";
         battleLog.setText(battleLogText);
+
         if (!allyDodged) {
             lutemonEnemy.attack(lutemonAllyClone);
         } else {
             battleLogText +="\n" + lutemonAllyClone.getName() + " dodged the attack";
         }
 
+        progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
+
         if (lutemonAllyClone.getHealth() <= 0){
             battleLogText += "\n" + lutemonAllyClone.getName() + " died";
             launchBattleOutcome(view, "lost");
         }
-        progressBarHealthAlly.setProgress(lutemonAllyClone.getHealth());
+
 
         battleLogText += "\n" + lutemonAllyClone.getName() + " escaped death";
         battleLogText +="\n#####\n" + String.format("%s(%d) att: %d; def: %d; health: %d/%d",lutemonAllyClone.getName(), lutemonAllyClone.getExperience(), lutemonAllyClone.getAttack(), lutemonAllyClone.getDefense(), lutemonAllyClone.getHealth(), lutemonAllyClone.getMaxHealth());

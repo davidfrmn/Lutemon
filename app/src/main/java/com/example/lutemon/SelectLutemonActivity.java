@@ -41,6 +41,7 @@ public class SelectLutemonActivity extends AppCompatActivity implements LutemonA
 
 
         storage = Storage.getInstance();
+        storage.loadLutemons(this);
 
         if (storage.listLutemons().isEmpty()) {
             Toast.makeText(this, "No lutemons created", Toast.LENGTH_SHORT).show();
