@@ -14,8 +14,9 @@ public class Lutemon {
     private int battleCounter;
     private int winCounter;
     private int trainingCounter;
+    private int imageID;
 
-    public Lutemon(String name, String color, int experience, int maxHealth, int attack, int defense){
+    public Lutemon(String name, String color, int experience, int maxHealth, int attack, int defense, int imageID){
         this.id = idCounter++;
         this.name = name;
         this.color = color;
@@ -27,6 +28,7 @@ public class Lutemon {
         this.battleCounter = 0;
         this.winCounter = 0;
         this.trainingCounter = 0;
+        this.imageID=imageID;
     }
 
     public int getId() {return id;}
@@ -57,12 +59,13 @@ public class Lutemon {
     public void setTrainingCounter(int trainingCounter) {this.trainingCounter = trainingCounter;}
 
     public static int getIdCounter() {return idCounter;}
+    public int getImageID() {return imageID;}
 
     //for temporary battle modifications
     //it increases the id but it doesn't matter since the purpose of the id is to identify the lutemons and it will serve its purpose
     public Lutemon getClone(){
         idCounter--; // it will decrease the id number so we will get continuous id numbers and since we don't save the close it doesn't matter if it has the same id as another lutemon
-        return new Lutemon(this.name, this.color, this.experience, this.maxHealth, this.attack, this.defense);
+        return new Lutemon(this.name, this.color, this.experience, this.maxHealth, this.attack, this.defense, this.imageID);
     }
     public void increaseDefense( int amount){ this.defense+=amount;}
 
