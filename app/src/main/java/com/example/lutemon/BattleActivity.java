@@ -16,7 +16,11 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.lutemon.lutemons.BlackLutemon;
+import com.example.lutemon.lutemons.GreenLutemon;
 import com.example.lutemon.lutemons.Lutemon;
+import com.example.lutemon.lutemons.OrangeLutemon;
+import com.example.lutemon.lutemons.PinkLutemon;
+import com.example.lutemon.lutemons.WhiteLutemon;
 
 public class BattleActivity extends AppCompatActivity {
     private Storage storage;
@@ -61,7 +65,20 @@ public class BattleActivity extends AppCompatActivity {
         //saving
         storage.saveLutemons(this);
 
-        lutemonEnemy = new BlackLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        //creating enemy with a random color but with the same experience
+        double randomNumber = Math.random();
+        if (randomNumber >= 0.8) {
+            lutemonEnemy = new OrangeLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        } else if (randomNumber >= 0.6) {
+            lutemonEnemy = new PinkLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        } else if (randomNumber >= 0.4) {
+            lutemonEnemy = new BlackLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        } else if (randomNumber >= 0.2) {
+            lutemonEnemy = new GreenLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        } else {
+            lutemonEnemy = new WhiteLutemon("Wild Lutemon", lutemonAlly.getExperience());
+        }
+
 
         //setting up the views
         imageAlly = findViewById(R.id.imageViewAlly);
