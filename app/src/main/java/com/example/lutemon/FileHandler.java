@@ -1,7 +1,6 @@
 package com.example.lutemon;
 
 import android.content.Context;
-import android.widget.Toast;
 
 import com.example.lutemon.lutemons.BlackLutemon;
 import com.example.lutemon.lutemons.GreenLutemon;
@@ -18,8 +17,6 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,7 +37,6 @@ public class FileHandler {
             fileWriter.write(jsonArray.toString(2)); // we make it look cleaner
             System.out.println("Lutemons saved successfully");
         }catch (Exception e){
-            Toast toast = Toast.makeText(context, "Error: " + e.getMessage(), Toast.LENGTH_SHORT);
             System.out.println("Error: " + e.getMessage());
         }
 
