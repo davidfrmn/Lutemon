@@ -14,8 +14,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.lutemon.display.LutemonAdapter;
+import com.example.lutemon.lutemons.Lutemon;
 
-public class SelectLutemonActivity extends AppCompatActivity {
+public class SelectLutemonActivity extends AppCompatActivity implements LutemonAdapter.OnItemClickListener {
     private Storage storage;
     private LutemonAdapter lutemonAdapter;
     private RecyclerView recyclerView;
@@ -46,7 +47,7 @@ public class SelectLutemonActivity extends AppCompatActivity {
             launchMenu(null);
         }
 
-        lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), false);
+        lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), false, this);
         recyclerView = setupRecyclerView();
         recyclerView.setAdapter(lutemonAdapter);
     }
@@ -54,6 +55,17 @@ public class SelectLutemonActivity extends AppCompatActivity {
     public void launchMenu(View view) {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+    }
+
+    //handle selection
+    @Override
+    public void onItemClick(int position) {
+        Lutemon selectedLutemon = lutemonAdapter.getLutemonAtPosition(position);
+        if (selectedLutemon != null) {
+            storage.setActiveLutemon(selectedLutemon);
+            launchMenu(null);
+        }
+
     }
 
 

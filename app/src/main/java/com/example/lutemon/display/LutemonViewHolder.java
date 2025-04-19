@@ -14,11 +14,22 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
     private TextView textViewDataLine2;
     private ImageView imageViewLutemon;
 
-    public LutemonViewHolder(View itemView) {
+    public LutemonViewHolder(View itemView, final LutemonAdapter.OnItemClickListener listener) {
         super(itemView);
         textViewDataLine1 = itemView.findViewById(R.id.textViewDataLine1);
         textViewDataLine2 = itemView.findViewById(R.id.textViewDataLine2);
         imageViewLutemon = itemView.findViewById(R.id.imageViewAvatar);
+
+        //set click listener for the entire item
+        itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int position = getAdapterPosition();
+                if (position != RecyclerView.NO_POSITION) {
+                    listener.onItemClick(position);
+                }
+            }
+        });
 
     }
 
