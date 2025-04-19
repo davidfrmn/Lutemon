@@ -14,14 +14,15 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 
 public class FileHandler {
+    private static final String FILE_NAME = "lutemons.json";
     //saves and loads lutemons using json files
     public static void saveLutemons(Context context, List<Lutemon> lutemons) {
         // lutemon -> json object -> json array -> write to file
@@ -32,19 +33,16 @@ public class FileHandler {
             jsonArray.put(jsonObject);
         }
 
-        //write to file
-        try {
-            FileWriter fileWriter = new FileWriter(context.getFilesDir() + "/lutemons.json");
+        try(FileWriter fileWriter = new FileWriter( new File(context.getFilesDir(), FILE_NAME), false)){
             fileWriter.write(jsonArray.toString(2)); // we make it look cleaner
-            fileWriter.close();
             System.out.println("Lutemons saved successfully");
-        } catch (Exception e) {
+        }catch (Exception e){
             System.out.println("Error: " + e.getMessage());
         }
 
     }
 
-    public static List<Lutemon> loadLutemons(Context context) throws JSONException {
+    public static ArrayList<Lutemon> loadLutemons(Context context) throws JSONException {
         ArrayList<Lutemon> lutemons = new ArrayList<>();
         // read and parse json
         String jsonContent = readJsonFile(context);
@@ -95,21 +93,27 @@ public class FileHandler {
 
     private static String readJsonFile(Context context) {
         // read the json file and return the content as a string
-        StringBuilder stringBuilder = new StringBuilder();
-        try (InputStream inputStream = context.getAssets().open("lutemons.json");
-            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream))) {
+        File file = new File(context.getFilesDir(), FILE_NAME);
+        if (!file.exists()) {
+            return null;
+        }
 
+        StringBuilder stringBuilder = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new FileReader(file))){
             String line;
             while ((line = reader.readLine()) != null) {
                 stringBuilder.append(line);
             }
-
-        } catch (Exception e) {
+        } catch (Exception e){
             System.out.println("Error: " + e.getMessage());
+            return null;
         }
+
 
         return stringBuilder.toString();
     }
+
+
 
 
     private static JSONObject lutemonToJsonObject(Lutemon lutemon) {

@@ -40,12 +40,15 @@ public class StatisticsActivity extends AppCompatActivity implements LutemonAdap
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
         textViewNumberOfLutemons = findViewById(R.id.textViewNumberOfLutemons);
         textViewNumberOfBattles = findViewById(R.id.textViewNumberOfBattles);
         textViewNumberOfTrainings = findViewById(R.id.textViewNumberOfTrainings);
         textViewnumberOfWins = findViewById(R.id.textViewnumberOfWins);
 
         storage = Storage.getInstance();
+        storage.loadLutemons(this);
+
         lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), true,this);
         recyclerView = setupRecyclerView();
         recyclerView.setAdapter(lutemonAdapter);

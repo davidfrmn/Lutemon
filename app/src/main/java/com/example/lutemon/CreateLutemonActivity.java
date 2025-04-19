@@ -64,6 +64,7 @@ public class CreateLutemonActivity extends AppCompatActivity {
         }
 
         storage.addLutemon(lutemon);
+        storage.saveLutemons(this);
         storage.setActiveLutemon(lutemon);
         launchMenu(view);
     }
