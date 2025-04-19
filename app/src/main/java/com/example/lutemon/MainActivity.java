@@ -24,6 +24,11 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
+        //load lutemons if they are not loaded yet
+        Storage storage = Storage.getInstance();
+        if (!storage.isLoaded()) {
+            storage.loadLutemons(this);
+        }
 
     }
 

@@ -39,11 +39,8 @@ public class SelectLutemonActivity extends AppCompatActivity implements LutemonA
             return insets;
         });
 
-        //try to load lutemons if they are not loaded yet
+
         storage = Storage.getInstance();
-        if (!storage.isLoaded()) {
-            storage.loadLutemons(this);
-        }
 
         //if there are no lutemons
         if (storage.listLutemons().isEmpty()) {
