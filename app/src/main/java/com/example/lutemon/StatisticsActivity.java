@@ -47,7 +47,10 @@ public class StatisticsActivity extends AppCompatActivity implements LutemonAdap
         textViewnumberOfWins = findViewById(R.id.textViewnumberOfWins);
 
         storage = Storage.getInstance();
-        storage.loadLutemons(this);
+        //load lutemons if they are not loaded yet
+        if (!storage.isLoaded()) {
+            storage.loadLutemons(this);
+        }
 
         lutemonAdapter = new LutemonAdapter(this, storage.listLutemons(), true,this);
         recyclerView = setupRecyclerView();

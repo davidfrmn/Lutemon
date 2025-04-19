@@ -39,10 +39,13 @@ public class SelectLutemonActivity extends AppCompatActivity implements LutemonA
             return insets;
         });
 
-
+        //try to load lutemons if they are not loaded yet
         storage = Storage.getInstance();
-        storage.loadLutemons(this);
+        if (!storage.isLoaded()) {
+            storage.loadLutemons(this);
+        }
 
+        //if there are no lutemons
         if (storage.listLutemons().isEmpty()) {
             Toast.makeText(this, "No lutemons created", Toast.LENGTH_SHORT).show();
             launchMenu(null);
